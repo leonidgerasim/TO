@@ -54,11 +54,7 @@ class Extr:
             return -1*np.array([0, 0, 2*xk[0] + 8*xk[2]])
 
     def newton_pk(self, xk):
-        x1 = 6*xk[0] - xk[1] + 2*xk[2] - 6
-        x2 = -xk[0] + 4*xk[1]
-        x3 = 2*xk[0] + 8*xk[2]
-        g = np.array([x1, x2, x3])
-        return np.dot(np.linalg.inv(self.h), g)
+        return np.linalg.solve(self.h, self.grad_f_n(xk))
 
     def fletch_pk(self, k, df):
         xk = df.loc[k]['xk']
